@@ -1,9 +1,12 @@
 <!--The whole content below can be removed with the new code.-->
-<div style="text-align:center">
-  <h1>
-    Welcome to {{title}}!!
-  </h1>
-  <input type="text" name="location" [(ngModel)]="location">
-  <button (click)="getWeather(location)">Enter</button>
-  <h2>Current temp: {{ temperature | number: '1.0-0' }}</h2>
-  <h2>Feels like: {{ feelslike | number: '1.0-0' }}</h2>
+<div class="main" [style.background-image]="getCurrentBg()">
+  <div class="main__inner">
+    <h1>
+      Welcome to {{title}}!!
+    </h1>
+    <input type="text" name="location" [(ngModel)]="location">
+    <button (click)="getWeather(location)">Enter</button>
+    <div id="current">{{ temperature | number: '1.0-0' }}&deg;</div>
+    <div id="feels">Feels like: {{ feelslike | number: '1.0-0' }}</div>
+  </div>
+</div>

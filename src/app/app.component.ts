@@ -13,6 +13,7 @@ export class AppComponent {
   location: string
   temperature: number
   feelslike: number
+  currentBg: string
 
   constructor(private weatherService: WeatherService) {
     this.title = 'The Weather App'
@@ -30,7 +31,18 @@ export class AppComponent {
         console.log(weather)
         this.temperature = weather.currently.temperature
         this.feelslike = weather.currently.apparentTemperature
+        this.currentBg = weather.currently.icon
       })
     })
+  }
+
+  getCurrentBg() {
+    let style: string
+    if (this.currentBg) {
+      style = `url(../assets/img/background/${this.currentBg}.jpg)`
+    } else {
+      style = ''
+    }
+    return style
   }
 }
