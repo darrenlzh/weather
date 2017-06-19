@@ -3,3 +3,7 @@
   <h1>
     Welcome to {{title}}!!
   </h1>
+  <input type="text" name="location" [(ngModel)]="location">
+  <button (click)="getWeather(location)">Enter</button>
+  <h2>Current temp: {{ temperature | number: '1.0-0' }}</h2>
+  <h2>Feels like: {{ feelslike | number: '1.0-0' }}</h2>

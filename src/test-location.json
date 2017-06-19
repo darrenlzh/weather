@@ -1,0 +1,81 @@
+{
+    "results": [
+        {
+            "address_components": [
+                {
+                    "long_name": "Amherst",
+                    "short_name": "Amherst",
+                    "types": [
+                        "locality",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Amherst",
+                    "short_name": "Amherst",
+                    "types": [
+                        "administrative_area_level_3",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "Erie County",
+                    "short_name": "Erie County",
+                    "types": [
+                        "administrative_area_level_2",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "New York",
+                    "short_name": "NY",
+                    "types": [
+                        "administrative_area_level_1",
+                        "political"
+                    ]
+                },
+                {
+                    "long_name": "United States",
+                    "short_name": "US",
+                    "types": [
+                        "country",
+                        "political"
+                    ]
+                }
+            ],
+            "formatted_address": "Amherst, NY, USA",
+            "geometry": {
+                "bounds": {
+                    "northeast": {
+                        "lat": 42.9848281,
+                        "lng": -78.7837493
+                    },
+                    "southwest": {
+                        "lat": 42.9634463,
+                        "lng": -78.8061172
+                    }
+                },
+                "location": {
+                    "lat": 42.97900670000001,
+                    "lng": -78.792272
+                },
+                "location_type": "APPROXIMATE",
+                "viewport": {
+                    "northeast": {
+                        "lat": 42.9848281,
+                        "lng": -78.7837493
+                    },
+                    "southwest": {
+                        "lat": 42.9634463,
+                        "lng": -78.8061172
+                    }
+                }
+            },
+            "place_id": "ChIJs1SDqE1y04kRrdCvJZz9gdQ",
+            "types": [
+                "locality",
+                "political"
+            ]
+        }
+    ]
+}
