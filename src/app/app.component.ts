@@ -21,6 +21,7 @@ export class AppComponent {
   feelslike: number
   hourly: Object[]
   daily: Object[]
+  currentUnits: string
 
   currentBg: string
   searchIsActive: boolean
@@ -28,16 +29,19 @@ export class AppComponent {
   constructor(private weatherService: WeatherService) {
     this.location = 'Amherst, NY'
     this.searchIsActive = false;
-    this.getWeather(this.location)
+    this.currentUnits = 'us'
+    this.getWeather(this.location, this.currentUnits)
   }
 
-  getWeather(loc: string) {
+  getWeather(loc: string, units: string) {
+    console.log('called')
+    this.currentUnits = units
     this.lastLocation = this.location
     this.weatherService.getLocation(loc).subscribe(loc => {
       console.log(loc)
       let lat = loc.results[0].geometry.location.lat,
           lon = loc.results[0].geometry.location.lng
-      this.weatherService.getWeather(lat, lon).subscribe(weather => {
+      this.weatherService.getWeather(lat, lon, units).subscribe(weather => {
         console.log(weather)
         this.offset = weather.offset
         this.timezone = weather.timezone
@@ -48,8 +52,11 @@ export class AppComponent {
         this.currentBg = weather.currently.icon
         this.hourly = weather.hourly.data
         this.daily = weather.daily.data
+        this.currentUnits = weather.flags.units
       })
     })
+
+    console.log(this.currentUnits)
   }
 
   getCurrentBg() {

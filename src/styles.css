@@ -34,8 +34,8 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .main__inner--right {
+  display: flex;
+  flex-direction: column;
   width: 40%;
-  background: rgba(0, 0, 0, .5);
   margin-right: 3rem;
-  border-radius: 5px;
 }

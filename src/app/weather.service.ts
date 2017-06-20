@@ -11,8 +11,8 @@ export class WeatherService {
     console.log('WeatherService Initialized')
   }
 
-  getWeather(lat: number, lon: number) {
-    let url = `${this.API_URL}weather?lat=${lat}&lon=${lon}`
+  getWeather(lat: number, lon: number, units: string) {
+    let url = `${this.API_URL}weather?lat=${lat}&lon=${lon}&units=${units}`
     // let url = 'http://localhost:3000/results'
     return this.http.get(url).map(res => res.json())
   }

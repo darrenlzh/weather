@@ -133,3 +133,28 @@ img#hour__icon, img#day__icon{
 #day__temp--min {
   margin-left: .5rem;
 }
+
+#forecast-container {
+  background: rgba(0, 0, 0, .5);
+  border-radius: 5px;
+}
+#units {
+  margin-left: auto;
+}
+#units button {
+  background: none;
+  border: none;
+}
+#units button:focus {
+  outline: none;
+}
+#units img {
+  width: 70px;
+  opacity: .4
+}
+#units img:hover {
+  cursor: pointer;
+}
+#units img.active {
+  opacity: 1
+}
