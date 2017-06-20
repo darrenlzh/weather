@@ -2,3 +2,68 @@
   font-weight: 100;
   font-size: 20em;
 }
+
+#feels {
+  font-weight: 100;
+  font-size: 2rem;
+}
+
+#search {
+  padding: 1rem;
+  height: 100px;
+  width: auto;
+  display: inline-block;
+}
+
+#search__wrap {
+  display: flex;
+  position: relative;
+  width: auto;
+}
+
+#input__wrap {
+  height: 100%;
+}
+
+#search input {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 100;
+  font-size: 2.5rem;
+  color: white;
+  background: none;
+  border: none;
+  /*border-bottom: 1px solid white;*/
+  height: 100%;
+}
+#search input:focus {
+  outline: none;
+}
+
+#search__wrap::after {
+  content: '';
+  width: 0;
+  height: 1px;
+  background: white;
+  position: absolute;
+  bottom: 0;
+  transition: width .3s ease;
+}
+#search.active #search__wrap::after {
+  width: 100%;
+}
+
+#search button {
+  height: 100%;
+  background: none;
+  border: none;
+}
+
+#search button:hover {
+  cursor: pointer;
+}
+
+#search i.fa {
+  font-size: 2rem;
+  color: white;
+  padding: 0 1rem;
+}

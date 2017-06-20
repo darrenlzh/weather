@@ -1,12 +1,18 @@
 <!--The whole content below can be removed with the new code.-->
 <div class="main" [style.background-image]="getCurrentBg()">
   <div class="main__inner">
-    <h1>
-      Welcome to {{title}}!!
-    </h1>
-    <input type="text" name="location" [(ngModel)]="location">
-    <button (click)="getWeather(location)">Enter</button>
+    <div clickOutsideDirective id="search" (click)="searchActive()" (clickOutside)="searchActive()" [class.active]="searchIsActive">
+      <div id="search__wrap">
+        <div id="input__wrap">
+          <input type="text" name="location" [(ngModel)]="location"  (keypress)="adjustTextField()" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location)"
+          (blur)="remember()">
+        </div>
+        <button (click)="getWeather(location)">
+          <i class="fa fa-search" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
     <div id="current">{{ temperature | number: '1.0-0' }}&deg;</div>
-    <div id="feels">Feels like: {{ feelslike | number: '1.0-0' }}</div>
+    <div id="feels">feels like {{ feelslike | number: '1.0-0' }}&deg;</div>
   </div>
 </div>

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core'
+import { ClickOutsideDirective } from 'angular2-click-outside'
 
 import { WeatherService } from './weather.service'
 
@@ -11,18 +12,23 @@ import { WeatherService } from './weather.service'
 export class AppComponent {
   title: string
   location: string
+  lastLocation: string
   temperature: number
   feelslike: number
   currentBg: string
+  searchIsActive: boolean
 
   constructor(private weatherService: WeatherService) {
     this.title = 'The Weather App'
     this.location = 'Amherst, NY'
 
+    this.searchIsActive = false;
+
     this.getWeather(this.location)
   }
 
   getWeather(loc: string) {
+    this.lastLocation = this.location
     this.weatherService.getLocation(loc).subscribe(loc => {
       console.log(loc)
       let lat = loc.results[0].geometry.location.lat,
@@ -44,5 +50,20 @@ export class AppComponent {
       style = ''
     }
     return style
+  }
+
+  adjustTextField() {
+    let style: string
+    style = `${(this.location.length + 1) * 20}px`
+    return style
+  }
+
+  remember() {
+    this.location = this.lastLocation
+  }
+
+  searchActive() {
+    this.searchIsActive = !this.searchIsActive;
+    console.log(this.searchIsActive)
   }
 }
