@@ -7,7 +7,7 @@
     "currently": {
         "time": 1497893376,
         "summary": "Clear",
-        "icon": "wind",
+        "icon": "clear-day",
         "nearestStormDistance": 14,
         "nearestStormBearing": 168,
         "precipIntensity": 0,

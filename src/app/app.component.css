@@ -1,6 +1,11 @@
 #current {
   font-weight: 100;
-  font-size: 20em;
+  font-size: 20rem;
+}
+
+#summary {
+  font-weight: 100;
+  font-size: 4rem;
 }
 
 #feels {
@@ -25,28 +30,32 @@
   height: 100%;
 }
 
+#search input:focus, #search button:focus {
+  outline: none;
+}
+
 #search input {
   font-family: 'Roboto', sans-serif;
   font-weight: 100;
-  font-size: 2.5rem;
+  font-size: 3rem;
   color: white;
   background: none;
   border: none;
   /*border-bottom: 1px solid white;*/
   height: 100%;
 }
-#search input:focus {
-  outline: none;
-}
-
 #search__wrap::after {
   content: '';
   width: 0;
-  height: 1px;
+  height: 2px;
   background: white;
   position: absolute;
   bottom: 0;
   transition: width .3s ease;
+}
+#search.active {
+  background: rgba(0, 0, 0, .5);
+  border-radius: 5px;
 }
 #search.active #search__wrap::after {
   width: 100%;
@@ -56,14 +65,71 @@
   height: 100%;
   background: none;
   border: none;
+  transition: transform .3s ease;
+  z-index: 1;
 }
-
 #search button:hover {
   cursor: pointer;
+  transform: scale(1.1);
 }
 
 #search i.fa {
-  font-size: 2rem;
+  font-size: 3rem;
   color: white;
   padding: 0 1rem;
+}
+
+#hourly, #daily {
+  width: 100%;
+  font-weight: 100;
+}
+#hourly ul {
+  display: flex;
+  flex-direction: row;
+  list-style: none;
+  overflow: scroll;
+  margin: 0;
+  padding: 1rem;
+}
+#hourly ul li {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+img#hour__icon, img#day__icon{
+  width: 50px;
+  height: auto;
+}
+
+#daily ul {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+  padding: 0 2.5rem;
+}
+
+#daily ul li {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+#day__icon__temp__group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 55%;
+}
+#day__temp {
+  display: flex;
+}
+#day__temp--max {
+  margin-right: .5rem;
+  font-weight: 700;
+}
+#day__temp--min {
+  margin-left: .5rem;
 }

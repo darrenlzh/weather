@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
-import { ClickOutsideDirective } from 'angular2-click-outside'
 
 import { WeatherService } from './weather.service'
+import * as moment from 'moment-timezone'
 
 @Component({
   selector: 'app-root',
@@ -10,20 +10,24 @@ import { WeatherService } from './weather.service'
   providers: [WeatherService]
 })
 export class AppComponent {
-  title: string
   location: string
   lastLocation: string
-  temperature: number
+
+  offset: number
+  timezone: string
+  currentTime: number
+  currentTemperature: number
+  currentSummary: string
   feelslike: number
+  hourly: Object[]
+  daily: Object[]
+
   currentBg: string
   searchIsActive: boolean
 
   constructor(private weatherService: WeatherService) {
-    this.title = 'The Weather App'
     this.location = 'Amherst, NY'
-
     this.searchIsActive = false;
-
     this.getWeather(this.location)
   }
 
@@ -35,9 +39,15 @@ export class AppComponent {
           lon = loc.results[0].geometry.location.lng
       this.weatherService.getWeather(lat, lon).subscribe(weather => {
         console.log(weather)
-        this.temperature = weather.currently.temperature
+        this.offset = weather.offset
+        this.timezone = weather.timezone
+        this.currentTime = weather.currently.time
+        this.currentTemperature = weather.currently.temperature
+        this.currentSummary = weather.currently.summary
         this.feelslike = weather.currently.apparentTemperature
         this.currentBg = weather.currently.icon
+        this.hourly = weather.hourly.data
+        this.daily = weather.daily.data
       })
     })
   }
@@ -54,16 +64,21 @@ export class AppComponent {
 
   adjustTextField() {
     let style: string
-    style = `${(this.location.length + 1) * 20}px`
+    style = `${(this.location.length + 1) * 23}px`
     return style
   }
 
   remember() {
-    this.location = this.lastLocation
+    setTimeout(() => {
+      this.location = this.lastLocation
+    }, 100)
   }
 
   searchActive() {
-    this.searchIsActive = !this.searchIsActive;
-    console.log(this.searchIsActive)
+    this.searchIsActive = !this.searchIsActive
+  }
+
+  adjustTimeZone(time: number, format: string) {
+    return moment(time*1000).tz(this.timezone).format(format)
   }
 }

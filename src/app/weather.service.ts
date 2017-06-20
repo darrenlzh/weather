@@ -12,14 +12,14 @@ export class WeatherService {
   }
 
   getWeather(lat: number, lon: number) {
-    // let url = `${this.API_URL}weather?lat=${lat}&lon=${lon}`
-    let url = 'http://localhost:3000/results'
+    let url = `${this.API_URL}weather?lat=${lat}&lon=${lon}`
+    // let url = 'http://localhost:3000/results'
     return this.http.get(url).map(res => res.json())
   }
 
   getLocation(location: string) {
-    // let url = `${this.API_URL}location?address=${location}`
-    let url = 'http://localhost:3001/db'
+    let url = `${this.API_URL}location?address=${location}`
+    // let url = 'http://localhost:3001/db'
     return this.http.get(url).map(res => res.json())
   }
 
