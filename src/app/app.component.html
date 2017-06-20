@@ -1,55 +1,57 @@
 <!--The whole content below can be removed with the new code.-->
 <div class="main" [style.background-image]="getCurrentBg()">
-  <div class="main__inner--left">
-    <div clickOutsideDirective id="search" [class.active]="searchIsActive">
-      <div id="search__wrap">
-        <div id="input__wrap">
-          <input type="text" name="location" [(ngModel)]="location"  (keypress)="adjustTextField()" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
-          (blur)="remember(); searchActive()" (focus)="searchActive()">
+  <div class="main__wrap">
+    <div class="main__inner--left">
+      <div clickOutsideDirective id="search" [class.active]="searchIsActive">
+        <div id="search__wrap">
+          <div id="input__wrap">
+            <input type="text" name="location" [(ngModel)]="location"  (keypress)="adjustTextField()" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
+            (blur)="remember(); searchActive()" (focus)="searchActive()">
+          </div>
+          <button (click)="getWeather(location, currentUnits)">
+            <i class="fa fa-search" aria-hidden="true"></i>
+          </button>
         </div>
-        <button (click)="getWeather(location, currentUnits)">
-          <i class="fa fa-search" aria-hidden="true"></i>
+      </div>
+      <div id="current">{{ currentTemperature | number: '1.0-0' }}&deg;</div>
+      <div id="summary">{{ currentSummary }}</div>
+      <div id="feels">feels like {{ feelslike | number: '1.0-0' }}&deg;</div>
+    </div>
+    <div class="main__inner--right">
+      <!-- <div id="date">{{ currentTime | date:'EEEE, MMM d' }}</div> -->
+      <div id="forecast-container">
+        <div id="hourly">
+          <ul>
+            <li *ngFor="let hour of hourly">
+              <div id="hour__time">{{ adjustTimeZone(hour.time, 'h a') }}</div>
+              <img id="hour__icon" src="./assets/img/icons/{{ hour.icon }}.svg" />
+              <div id="hour__temp">{{ hour.temperature | number: '1.0-0'}}&deg;</div>
+            </li>
+          </ul>
+        </div>
+        <div id="daily">
+          <ul>
+            <li *ngFor="let day of daily">
+              <div id="day__date">{{ adjustTimeZone(day.time, 'dddd') }}</div>
+              <div id="day__icon__temp__group">
+                <img id="day__icon" src="./assets/img/icons/{{ day.icon }}.svg" />
+                <div id="day__temp">
+                  <div id="day__temp--max">{{ day.temperatureMax | number: '1.0-0'}}&deg;</div>
+                  <div id="day__temp--min">{{ day.temperatureMin | number: '1.0-0'}}&deg;</div>
+                </div>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div id="units">
+        <button (click)="getWeather(location, 'us')">
+          <img src="./assets/img/icons/fahrenheit.svg"  [class.active]="currentUnits==='us'"/>
+        </button>
+        <button (click)="getWeather(location, 'ca')">
+          <img src="./assets/img/icons/celsius.svg"  [class.active]="currentUnits==='ca'"/>
         </button>
       </div>
-    </div>
-    <div id="current">{{ currentTemperature | number: '1.0-0' }}&deg;</div>
-    <div id="summary">{{ currentSummary }}</div>
-    <div id="feels">feels like {{ feelslike | number: '1.0-0' }}&deg;</div>
-  </div>
-  <div class="main__inner--right">
-    <!-- <div id="date">{{ currentTime | date:'EEEE, MMM d' }}</div> -->
-    <div id="forecast-container">
-      <div id="hourly">
-        <ul>
-          <li *ngFor="let hour of hourly">
-            <div id="hour__time">{{ adjustTimeZone(hour.time, 'h a') }}</div>
-            <img id="hour__icon" src="../assets/img/icons/{{ hour.icon }}.svg" />
-            <div id="hour__temp">{{ hour.temperature | number: '1.0-0'}}&deg;</div>
-          </li>
-        </ul>
-      </div>
-      <div id="daily">
-        <ul>
-          <li *ngFor="let day of daily">
-            <div id="day__date">{{ adjustTimeZone(day.time, 'dddd') }}</div>
-            <div id="day__icon__temp__group">
-              <img id="day__icon" src="../assets/img/icons/{{ day.icon }}.svg" />
-              <div id="day__temp">
-                <div id="day__temp--max">{{ day.temperatureMax | number: '1.0-0'}}&deg;</div>
-                <div id="day__temp--min">{{ day.temperatureMin | number: '1.0-0'}}&deg;</div>
-              </div>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div id="units">
-      <button (click)="getWeather(location, 'us')">
-        <img src="../assets/img/icons/fahrenheit.svg"  [class.active]="currentUnits==='us'"/>
-      </button>
-      <button (click)="getWeather(location, 'ca')">
-        <img src="../assets/img/icons/celsius.svg"  [class.active]="currentUnits==='ca'"/>
-      </button>
     </div>
   </div>
 </div>

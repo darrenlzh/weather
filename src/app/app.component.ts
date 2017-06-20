@@ -62,7 +62,7 @@ export class AppComponent {
   getCurrentBg() {
     let style: string
     if (this.currentBg) {
-      style = `url(../assets/img/background/${this.currentBg}.jpg)`
+      style = `url(./assets/img/background/${this.currentBg}.jpg)`
     } else {
       style = ''
     }
