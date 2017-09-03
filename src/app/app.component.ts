@@ -6,7 +6,7 @@ import * as moment from 'moment-timezone'
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  styleUrls: ['./app.component.scss'],
   providers: [WeatherService]
 })
 export class AppComponent {
@@ -34,15 +34,16 @@ export class AppComponent {
   }
 
   getWeather(loc: string, units: string) {
-    console.log('called')
     this.currentUnits = units
     this.lastLocation = this.location
     this.weatherService.getLocation(loc).subscribe(loc => {
-      console.log(loc)
+      // console.log(loc)
       let lat = loc.results[0].geometry.location.lat,
           lon = loc.results[0].geometry.location.lng
+      this.lastLocation = loc.results[0].address_components[0].long_name
+      this.location = this.lastLocation
       this.weatherService.getWeather(lat, lon, units).subscribe(weather => {
-        console.log(weather)
+        // console.log(weather)
         this.offset = weather.offset
         this.timezone = weather.timezone
         this.currentTime = weather.currently.time
