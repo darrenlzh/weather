@@ -5,7 +5,7 @@ import 'rxjs/add/operator/map'
 @Injectable()
 export class WeatherService {
 
-  private API_URL = 'http://darrenl.im/api/'
+  private API_URL = 'https://darrenl.im/api/'
 
   constructor(private http: Http) {
     console.log('WeatherService Initialized')
