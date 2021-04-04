@@ -1,13 +1,15 @@
 <!--The whole content below can be removed with the new code.-->
-<div class="main" [style.background-image]="getCurrentBg()">
+<div class="main">
+  <div class="main__bg" [style.background-image]="getCurrentBg()"></div>
   <div class="main__wrap">
     <div clickOutsideDirective id="search" [class.active]="searchIsActive">
       <div id="search__wrap">
         <div id="input__wrap">
-          <input type="text" name="location" [(ngModel)]="location"  (keypress)="adjustTextField()" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
-          (blur)="remember(); searchActive()" (focus)="searchActive()">
+          <input #searchInput type="text" name="location" [(ngModel)]="location" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
+          (blur)="remember(); searchBlur()" (focus)="searchFocus()" [class.active]="searchIsActive">
+          <div class="input__enter" *ngIf="searchIsActive">ENTER</div>
         </div>
-        <button (click)="getWeather(location, currentUnits)">
+        <button (click)="searchFocus()" *ngIf="!searchIsActive">
           <i class="fa fa-search" aria-hidden="true"></i>
         </button>
       </div>
@@ -42,9 +44,9 @@
       </div>
     </div>
     <div id="units">
-      <button (click)="getWeather(location, 'us')" [class.active]="currentUnits==='us'">&deg;F
+      <button (click)="changeUnit('us')" [class.active]="currentUnits==='us'">&deg;F
       </button>
-      <button (click)="getWeather(location, 'ca')" [class.active]="currentUnits==='ca'">&deg;C
+      <button (click)="changeUnit('ca')" [class.active]="currentUnits==='ca'">&deg;C
       </button>
     </div>
   </div>

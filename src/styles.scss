@@ -32,8 +32,19 @@ h1, h2, h3, h4, h5, h6 {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  position: relative;
   height: 100vh;
   width: 100vw;
+}
+
+.main__bg {
+  height: calc(100% + 20px);
+  width: calc(100% + 20px);
+  position: absolute;
+  top: -10px;
+  left: -10px;
+  z-index: -1;
+  filter: blur(5px);
   background: {
     position: center;
     repeat: no-repeat;
@@ -114,8 +125,20 @@ h1, h2, h3, h4, h5, h6 {
 }
 #search__wrap {
   display: flex;
+  padding-right: 65px;
   position: relative;
   width: auto;
+
+  .input__enter {
+    background: rgba(0,0,0,.6);
+    border-radius: 3px;
+    padding: .5rem .7rem;
+    font-size: .6rem;
+    width: 3.25rem;
+    position: absolute;
+    right: 0;
+    top: 15px;
+  }
 }
 #input__wrap {
   height: 100%;
@@ -134,6 +157,9 @@ h1, h2, h3, h4, h5, h6 {
   height: 100%;
   @include mobile {
     font-size: 1.5rem;
+  }
+  &.active {
+    width: 100% !important;
   }
 }
 #search__wrap::after {
@@ -178,9 +204,9 @@ h1, h2, h3, h4, h5, h6 {
   transform: scale(1.1);
 }
 #search i.fa {
-  font-size: 3rem;
+  font-size: 2rem;
   color: white;
-  padding: 0 1rem;
+  padding: .7rem 1rem;
   @include mobile {
     font-size: 1.3rem;
     padding: 0 0 0 1rem;

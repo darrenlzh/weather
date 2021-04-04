@@ -1,7 +1,7 @@
-import { Component } from '@angular/core'
+import { Component, ViewChild } from '@angular/core'
 
 import { WeatherService } from './weather.service'
-import * as moment from 'moment-timezone'
+import moment from 'moment-timezone';
 
 @Component({
   selector: 'app-root',
@@ -10,8 +10,10 @@ import * as moment from 'moment-timezone'
   providers: [WeatherService]
 })
 export class AppComponent {
+  @ViewChild('searchInput') searchElement
+
   location: string
-  lastLocation: string
+  lastLocation: any
 
   offset: number
   timezone: string
@@ -34,16 +36,18 @@ export class AppComponent {
   }
 
   getWeather(loc: string, units: string) {
+
     this.currentUnits = units
-    this.lastLocation = this.location
+
     this.weatherService.getLocation(loc).subscribe(loc => {
-      // console.log(loc)
+
       let lat = loc.results[0].geometry.location.lat,
           lon = loc.results[0].geometry.location.lng
-      this.lastLocation = loc.results[0].address_components[0].long_name
-      this.location = this.lastLocation
+      this.lastLocation = loc
+      this.location = loc.results[0].address_components[0].long_name
+
       this.weatherService.getWeather(lat, lon, units).subscribe(weather => {
-        // console.log(weather)
+
         this.offset = weather.offset
         this.timezone = weather.timezone
         this.currentTime = weather.currently.time
@@ -56,8 +60,14 @@ export class AppComponent {
         this.currentUnits = weather.flags.units
       })
     })
+  }
+  
+  getLocationPretty() {
+    return this.lastLocation.results[0].address_components[0].long_name
+  }
 
-    console.log(this.currentUnits)
+  getLocation() {
+    return this.lastLocation.results[0].formatted_address
   }
 
   getCurrentBg() {
@@ -78,15 +88,24 @@ export class AppComponent {
 
   remember() {
     setTimeout(() => {
-      this.location = this.lastLocation
+      this.location = this.getLocationPretty()
     }, 100)
   }
 
-  searchActive() {
-    this.searchIsActive = !this.searchIsActive
+  searchFocus() {
+    this.searchElement.nativeElement.focus()
+    this.searchIsActive = true
+  }
+
+  searchBlur() {
+    this.searchIsActive = false
   }
 
   adjustTimeZone(time: number, format: string) {
     return moment(time*1000).tz(this.timezone).format(format)
+  }
+
+  changeUnit(loc: string) {
+    this.getWeather(this.getLocation(), loc)
   }
 }
