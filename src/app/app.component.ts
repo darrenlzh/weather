@@ -58,6 +58,8 @@ export class AppComponent {
         this.hourly = weather.hourly.data
         this.daily = weather.daily.data
         this.currentUnits = weather.flags.units
+
+        this.searchElement.nativeElement.blur()
       })
     })
   }

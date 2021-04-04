@@ -5,8 +5,10 @@
     <div clickOutsideDirective id="search" [class.active]="searchIsActive">
       <div id="search__wrap">
         <div id="input__wrap">
-          <input #searchInput type="text" name="location" [(ngModel)]="location" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
-          (blur)="remember(); searchBlur()" (focus)="searchFocus()" [class.active]="searchIsActive">
+          <form action="." (ngSubmit)="$event.preventDefault(); getWeather(location, currentUnits)">
+            <input #searchInput type="search" name="location" [(ngModel)]="location" [style.width]="adjustTextField()" (keyup.enter)="getWeather(location, currentUnits)"
+            (blur)="remember(); searchBlur()" (focus)="searchFocus()" [class.active]="searchIsActive">
+          </form>
           <div class="input__enter" *ngIf="searchIsActive">ENTER</div>
         </div>
         <button (click)="searchFocus()" *ngIf="!searchIsActive">
