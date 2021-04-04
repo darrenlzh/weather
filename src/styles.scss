@@ -88,8 +88,10 @@ h1, h2, h3, h4, h5, h6 {
   grid-area: current;
   font-weight: 100;
   font-size: 20rem;
+  min-width: 472px;
   @include mobile {
     font-size: 5rem;
+    min-width: unset;
     padding-left: 2.4rem;
   }
 }
